@@ -8,6 +8,7 @@ public class PlatformCreator : MonoBehaviour
 {
     public GameObject platform;
     public TMP_Text number;
+    public TMP_Text questionText;
 
     private int CurrentNumber;
     private int DesiredNumber;
@@ -18,9 +19,10 @@ public class PlatformCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        questionText = GameObject.Find("QuestionText").GetComponent<TextMeshPro>();
         platformCount = 3;
-        platformXCoordinates = new int[3];
-        platformYCoordinates = new int[3];
+        platformXCoordinates = new int[platformCount];
+        platformYCoordinates = new int[platformCount];
 
         CurrentNumber = 0;
         NumberCreate();
@@ -51,12 +53,16 @@ public class PlatformCreator : MonoBehaviour
         {
             Instantiate(platform, new Vector2(platformXCoordinates[i], platformYCoordinates[i]), Quaternion.identity);
 
-            DesiredNumber = Random.Range(DesiredNumber, DesiredNumber + 100);
+            DesiredNumber = Random.Range(0, 100);
+            int OtherNumber = Random.Range(0, 100);
+
             var DesiredNumberDigitCount = Mathf.Floor(Mathf.Log10(DesiredNumber) + 1);
             number.name = DesiredNumber.ToString();
             number.text = DesiredNumber.ToString();
             number.GetComponent<BoxCollider2D>().size = new Vector2(DesiredNumberDigitCount * 0.4f, 0.5f);
-            Instantiate(number, new Vector2(platformXCoordinates[i] + 0.45f, platformYCoordinates[i] + 1), Quaternion.identity);
+            Instantiate(number, new Vector2(platformXCoordinates[i] + 0.2f, platformYCoordinates[i] + 1), Quaternion.identity);
+
+            questionText.text = OtherNumber.ToString() + " + <color=red>?</color> = " + (DesiredNumber + OtherNumber).ToString(); 
         }
     }
 
