@@ -828,8 +828,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fd43da56705114e9e6b1a365379fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 10
-  JumpForceLimit: 3
+  xdirection: 0
+  ydirection: 0
+  RB: {fileID: 1696466848}
+  speed: 15
+  JumpConstant: 20
+  isGround: 0
 --- !u!1 &1858171257
 GameObject:
   m_ObjectHideFlags: 0
